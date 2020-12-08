@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "build": "asb --verbose",
+    "deploy": "near deploy --accountId dev-1607460957073-6875897 --wasmFile=\"./collection_comparison.wasm\" --initFunction new --initArgs '{}'",
+    "reset": "rm -rf contract.wasm && rm -rf ./neardev",
+    "rebuild": "yarn reset && yarn build && yarn deploy"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.14.0",
+    "near-cli": "^1.4.0",
+    "user-home": "^2.0.0",
+    "near-sdk-as": "^2.1.0"
+  }
+}
