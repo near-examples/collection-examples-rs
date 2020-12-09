@@ -1,3 +1,5 @@
 /neardev
 /node_modules
 contract.wasm
+result.json
+package-lock.json
