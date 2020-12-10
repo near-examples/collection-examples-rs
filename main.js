@@ -21,24 +21,24 @@ async function addToTreeMapResult(key, value) {
 }
 
 // calculates total gas from each call
-async function calculateGas(obj) {
+async function calculateGas(contractMethod, dataObj) {
   let resultArr = [];
-  const result = await addToTreeMapResult(obj.key, obj.value);
+  const result = await contractMethod(dataObj.key, dataObj.value);
   resultArr.push(result.transaction_outcome.outcome.gas_burnt);
   for (let i = 0; i < result.receipts_outcome.length; i++) {
     resultArr.push(result.receipts_outcome[i].outcome.gas_burnt);
   }
-  return resultArr.reduce((a, b) => a + b, 0);
+  return resultArr.reduce((acc, curr) => acc + curr, 0);
 }
 
-async function writeResults(arr) {
+async function writeResults(contractMethod, dataArr) {
   let resultArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    const result = await calculateGas(arr[i]);
+  for (let i = 0; i < dataArr.length; i++) {
+    const result = await calculateGas(contractMethod, dataArr[i]);
     resultArr.push(result);
     console.log(result);
     fs.writeFileSync("result.json", JSON.stringify(resultArr));
   }
 }
 
-writeResults(data);
+writeResults(addToTreeMapResult, data);
