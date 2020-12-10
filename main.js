@@ -20,10 +20,25 @@ async function addToTreeMapResult(key, value) {
   return result;
 }
 
+async function addKeyValuePair(contractMethodString, key, value) {
+  const contract = await getContract();
+  const result = await contract.account.functionCall(
+    contract.contractId,
+    contractMethodString,
+    { key, value },
+    "300000000000000"
+  );
+  return result;
+}
+
 // calculates total gas from each call
 async function calculateGas(contractMethod, dataObj) {
   let resultArr = [];
-  const result = await contractMethod(dataObj.key, dataObj.value);
+  const result = await addKeyValuePair(
+    contractMethod,
+    dataObj.key,
+    dataObj.value
+  );
   resultArr.push(result.transaction_outcome.outcome.gas_burnt);
   for (let i = 0; i < result.receipts_outcome.length; i++) {
     resultArr.push(result.receipts_outcome[i].outcome.gas_burnt);
@@ -41,4 +56,8 @@ async function writeResults(contractMethod, dataArr) {
   }
 }
 
-writeResults(addToTreeMapResult, data);
+// writeResults('add_tree_map', data);
+
+// writeResults('add_lookup_map', data);
+
+writeResults("add_unordered_map", data);
