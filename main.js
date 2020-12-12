@@ -1,6 +1,7 @@
 const { getContract } = require("./utils");
 const data = require("./data");
 const fs = require("fs");
+const { timeStamp } = require("console");
 
 // addTreeMap and addTreeMapGasRes perform _almost_ the same function
 // the _only_ difference is addTreeMapGasRes returns result data
@@ -20,8 +21,7 @@ async function addToTreeMapResult(key, value) {
   return result;
 }
 
-async function addKeyValuePair(contractMethodString, key, value) {
-  const contract = await getContract();
+async function addKeyValuePair(contract, contractMethodString, key, value) {
   const result = await contract.account.functionCall(
     contract.contractId,
     contractMethodString,
@@ -31,10 +31,10 @@ async function addKeyValuePair(contractMethodString, key, value) {
   return result;
 }
 
-// calculates total gas from each call
-async function calculateGas(contractMethod, dataObj) {
+async function calculateGas(contract, contractMethod, dataObj) {
   let resultArr = [];
   const result = await addKeyValuePair(
+    contract,
     contractMethod,
     dataObj.key,
     dataObj.value
@@ -46,18 +46,23 @@ async function calculateGas(contractMethod, dataObj) {
   return resultArr.reduce((acc, curr) => acc + curr, 0);
 }
 
-async function writeResults(contractMethod, dataArr) {
+async function writeResults(contract, contractMethod, dataArr) {
   let resultArr = [];
   for (let i = 0; i < dataArr.length; i++) {
-    const result = await calculateGas(contractMethod, dataArr[i]);
-    resultArr.push(result);
-    console.log(result);
+    const timeBeforeCall = (Date.now());
+    const result = await calculateGas(contract, contractMethod, dataArr[i]);
+    const timeAfterCall = (Date.now());
+    resultArr.push([dataArr[i].key, result]);
+    console.log(result, ((timeAfterCall - timeBeforeCall)/1000 + " sec."));
     fs.writeFileSync("result.json", JSON.stringify(resultArr));
   }
 }
 
-// writeResults('add_tree_map', data);
+async function main() {
+  const contract = await getContract();
+  // writeResults(contract, 'add_lookup_map', data);
+   writeResults(contract, 'add_tree_map', data);
+  // writeResults(contract, "add_unordered_map", data);
+}
 
-// writeResults('add_lookup_map', data);
-
-writeResults("add_unordered_map", data);
+main();

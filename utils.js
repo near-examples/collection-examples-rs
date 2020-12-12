@@ -5,11 +5,15 @@ const userHome = require('user-home');
 const contractName = process.env.CONTRACT_NAME;
 const keyStore = new nearAPI.keyStores.UnencryptedFileSystemKeyStore(`${userHome}/.near-credentials`);
 
+// http://34.94.180.117:3030
+// SLOW VVv
+// http://34.94.158.10:3030
+
 async function getContract() {
     const config = {
         keyStore,
         networkId: 'default',
-        nodeUrl: 'https://rpc.testnet.near.org',
+        nodeUrl: 'http://34.94.180.117:3030',
         walletUrl: 'https://wallet.testnet.near.org',
         helperUrl: 'https://helper.testnet.near.org',
         explorerUrl: 'https://explorer.testnet.near.org'
@@ -34,4 +38,4 @@ async function getContract() {
     return new nearAPI.Contract(accountObj, contractName, methodArgs);
 }
 
-module.exports = { getContract } ;
+module.exports = { getContract };

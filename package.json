@@ -1,7 +1,7 @@
 {
   "scripts": {
     "build": "asb --verbose",
-    "deploy": "near deploy --accountId dev-1607460957073-6875897 --wasmFile=\"./collection_comparison.wasm\" --initFunction new --initArgs '{}'",
+    "deploy": "near deploy --accountId collections.testnet --wasmFile=\"./collection_comparison.wasm\" --initFunction new --initArgs '{}'",
     "reset": "rm -rf contract.wasm && rm -rf ./neardev",
     "rebuild": "yarn reset && yarn build && yarn deploy"
   },
