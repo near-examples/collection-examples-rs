@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "example-charts": "open results/example-results/index.html",
+    "my-charts": "open results/user-results/index.html",
     "build": "asb --verbose",
     "deploy": "near deploy --accountId collections.testnet --wasmFile=\"./collection_comparison.wasm\" --initFunction new --initArgs '{}'",
     "reset": "rm -rf contract.wasm && rm -rf ./neardev",

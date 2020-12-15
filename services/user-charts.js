@@ -1,8 +1,8 @@
 require.config({
   paths: {
-    tree_map: "../chart-data/add_tree_map_results",
-    lookup_map: "../chart-data/add_lookup_map_results",
-    unordered_map: "../chart-data/add_unordered_map_results",
+    tree_map: "../results/user-results/add_tree_map_results",
+    lookup_map: "../results/user-results/add_lookup_map_results",
+    unordered_map: "../results/user-results/add_unordered_map_results",
   },
 });
 

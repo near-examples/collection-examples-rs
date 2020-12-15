@@ -1,24 +1,12 @@
-const { getContract } = require("./utils");
-const data = require("./data");
+const { getContract } = require("./services/utils");
+const data = require("./services/data");
 const fs = require("fs");
-const { timeStamp } = require("console");
 
 // addTreeMap and addTreeMapGasRes perform _almost_ the same function
 // the _only_ difference is addTreeMapGasRes returns result data
 async function addToTreeMapSimple(key, value) {
   const contract = await getContract();
   await contract.add_tree_map({ key, value });
-}
-
-async function addToTreeMapResult(key, value) {
-  const contract = await getContract();
-  const result = await contract.account.functionCall(
-    contract.contractId,
-    "add_tree_map",
-    { key, value },
-    "300000000000000"
-  );
-  return result;
 }
 
 async function addKeyValuePair(contract, contractMethodString, key, value) {
@@ -57,7 +45,7 @@ async function writeResults(contract, contractMethod, dataArr) {
     resultArr.push(result);
     console.log(gasBurnt, (timeAfterCall - timeBeforeCall) / 1000 + " sec.");
     fs.writeFileSync(
-      `chart-data/${contractMethod}_results.js`,
+      `results/user-results/${contractMethod}_results.js`,
       `const ${contractMethod}_data = ${JSON.stringify(resultArr)}`
     );
   }
@@ -66,8 +54,8 @@ async function writeResults(contract, contractMethod, dataArr) {
 async function main() {
   const contract = await getContract();
   // writeResults(contract, "add_lookup_map", data);
-  // writeResults(contract, 'add_tree_map', data);
-  writeResults(contract, "add_unordered_map", data);
+  writeResults(contract, "add_tree_map", data);
+  // writeResults(contract, "add_unordered_map", data);
 }
 
 main();
