@@ -19,8 +19,8 @@ function renderChart(chartName, chartData) {
         {
           label: chartName,
           data: values,
-          backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-          borderColor: ["rgba(255, 99, 132, 1)"],
+          backgroundColor: ["rgba(0, 114, 206, .5)"],
+          borderColor: ["rgba(0, 0, 0, .5)"],
           borderWidth: 1,
         },
       ],
@@ -35,7 +35,8 @@ function renderChart(chartName, chartData) {
         yAxes: [
           {
             ticks: {
-              beginAtZero: false,
+              suggestedMin: 5000000000000,
+              suggestedMax: 8000000000000,
             },
           },
         ],
