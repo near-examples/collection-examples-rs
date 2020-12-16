@@ -1,15 +1,15 @@
-require("dotenv").config({ path: './neardev/dev-account.env' });
 const nearAPI = require("near-api-js");
 const userHome = require('user-home');
+const data = require("./data");
 
-const contractName = process.env.CONTRACT_NAME;
+const contractName = 'words.testnet';
 const keyStore = new nearAPI.keyStores.UnencryptedFileSystemKeyStore(`${userHome}/.near-credentials`);
 
 async function getContract() {
     const config = {
         keyStore,
         networkId: 'default',
-        nodeUrl: 'http://rpc.testnet.near.org',
+        nodeUrl:'http://rpc.testnet.near.org',
         walletUrl: 'https://wallet.testnet.near.org',
         helperUrl: 'https://helper.testnet.near.org',
         explorerUrl: 'https://explorer.testnet.near.org'
@@ -34,4 +34,14 @@ async function getContract() {
     return new nearAPI.Contract(accountObj, contractName, methodArgs);
 }
 
-module.exports = { getContract };
+const getDataSet = (maxVal) => {
+  const delta = Math.floor(data.length / maxVal);
+  let results = [];
+  for (let i = 0; i < data.length; i=i+delta) {
+    const element = data[i];
+    results.push(element);
+  }
+  return results;
+}
+
+module.exports = { getContract, getDataSet };
