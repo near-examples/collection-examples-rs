@@ -2,14 +2,14 @@ const nearAPI = require("near-api-js");
 const userHome = require('user-home');
 const data = require("./data");
 
-const contractName = 'words.testnet';
+const contractName = 'my.words.testnet';
 const keyStore = new nearAPI.keyStores.UnencryptedFileSystemKeyStore(`${userHome}/.near-credentials`);
 
 async function getContract() {
     const config = {
         keyStore,
         networkId: 'default',
-        nodeUrl:'http://rpc.testnet.near.org',
+        nodeUrl: 'https://rpc.testnet.near.org',
         walletUrl: 'https://wallet.testnet.near.org',
         helperUrl: 'https://helper.testnet.near.org',
         explorerUrl: 'https://explorer.testnet.near.org'
@@ -44,4 +44,4 @@ const getDataSet = (maxVal) => {
   return results;
 }
 
-module.exports = { getContract, getDataSet };
+module.exports = { contractName, getContract, getDataSet };

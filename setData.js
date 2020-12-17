@@ -1,6 +1,7 @@
 const { getContract, getDataSet } = require("./services/utils");
 const fs = require("fs");
 const { exec } = require("child_process");
+const uniqueData = require("./services/uniqueData");
 
 // addTreeMap and addTreeMapGasRes perform _almost_ the same function
 // the _only_ difference is addTreeMapGasRes returns result data
@@ -34,9 +35,9 @@ async function calculateGas(contract, contractMethod, dataObj) {
   return resultArr.reduce((acc, curr) => acc + curr, 0);
 }
 
-async function getResults(contract, contractMethod, dataArr) {
+async function recordGasResults(contract, contractMethod, dataArr) {
   let resultArr = [];
-  console.log(``)
+  console.log(`Storing data to [ ${contract} ] using [ ${contractMethod} ]...`)
   for (let i = 0; i < dataArr.length; i++) {
     const timeBeforeCall = Date.now();
     const gasBurnt = await calculateGas(contract, contractMethod, dataArr[i]);
@@ -47,20 +48,21 @@ async function getResults(contract, contractMethod, dataArr) {
     resultArr.push(result);
     console.log(gasBurnt, responseTime, dataArr[i].key);
     fs.writeFileSync(
-      `results/user-results/${contractMethod}_results.js`,
+      `results/user-results/set-data/${contractMethod}_results.js`,
       `const ${contractMethod}_data = ${JSON.stringify(resultArr)}`
     );
   }
 }
 
-async function setData() {
-  // enter number of records to add to each map (1 - 2000); 30 is default
-  const data = getDataSet(30);
+async function setData(amount) {
+  const data = getDataSet(amount);
+  // const combinedData = data.concat(uniqueData);
   const contract = await getContract();
-  await getResults(contract, "add_lookup_map", data);
-  await getResults(contract, "add_unordered_map", data);
-  await getResults(contract, "add_tree_map", data);
+  await recordGasResults(contract, "add_lookup_map", data);
+  await recordGasResults(contract, "add_unordered_map", data);
+  await recordGasResults(contract, "add_tree_map", data);
   exec('yarn my-charts');
 }
 
-setData();
+ // enter number of records to add to each map (1 - 2000); 30 is default
+setData(30);

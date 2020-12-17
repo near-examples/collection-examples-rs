@@ -1,8 +1,8 @@
 require.config({
   paths: {
-    tree_map: "../results/user-results/add_tree_map_results",
-    lookup_map: "../results/user-results/add_lookup_map_results",
-    unordered_map: "../results/user-results/add_unordered_map_results",
+    tree_map: "../results/example-results/add_tree_map_results",
+    lookup_map: "../results/example-results/add_lookup_map_results",
+    unordered_map: "../results/example-results/add_unordered_map_results",
   },
 });
 
@@ -19,7 +19,7 @@ function renderChart(chartName, chartData) {
         {
           label: chartName,
           data: values,
-          backgroundColor: ["rgba(0, 114, 206, .5)"],
+          backgroundColor: ["rgba(255, 178, 91, .5)"],
           borderColor: ["rgba(0, 0, 0, .5)"],
           borderWidth: 1,
         },
