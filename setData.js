@@ -38,14 +38,14 @@ async function recordGasResults(contract, contractMethod, dataArr) {
   );
   let resultArr = [];
   for (let i = 0; i < dataArr.length; i++) {
-    const timeBeforeCall = Date.now();
+    console.time('call_duration')
+    console.log("call placed at:", new Date())
     const gasBurnt = await calculateGas(contract, contractMethod, dataArr[i]);
-    const timeAfterCall = Date.now();
-    const responseTime = (timeAfterCall - timeBeforeCall) / 1000 + " sec.";
+    console.timeEnd('call_duration')
     let result = {};
     result[dataArr[i].key] = gasBurnt;
     resultArr.push(result);
-    console.log(gasBurnt, responseTime, dataArr[i].key);
+    console.log(gasBurnt, dataArr[i].key);
     fs.writeFileSync(
       `results/user-results/set-data/${contractMethod}_results.js`,
       `const ${contractMethod}_data = ${JSON.stringify(resultArr)}`
