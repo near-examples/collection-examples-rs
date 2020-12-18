@@ -2,7 +2,7 @@
   "scripts": {
     "create-account": "near create-account collections.$NEAR_ACCOUNT --masterAccount $NEAR_ACCOUNT --initialBalance 200",
     "delete-account": "near delete collections.$NEAR_ACCOUNT $NEAR_ACCOUNT",
-    "exSetcharts": "open results/example-results/set-data/index.html",
+    "exsetcharts": "open results/example-results/set-data/index.html",
     "exgetcharts": "open results/example-results/get-data/index.html",
     "setcharts": "open results/user-results/set-data/index.html",
     "getcharts": "open results/user-results/get-data/index.html",

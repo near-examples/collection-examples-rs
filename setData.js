@@ -62,7 +62,7 @@ async function setData(data) {
 }
 
 // enter number of records to add to each map (1 - 2000); 30 is default
-const data = getDataSet(60);
+const data = getDataSet(30);
 
 // combinedData takes data already stored on the contract and combines it with
 // unique data. This will show the difference gas costs for updating a keyValue pair vs. storing

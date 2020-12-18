@@ -32,10 +32,10 @@ This repository serves to demonstrate differences in gas consumption when storin
     Set an environment variable to use in these examples. To do so run the following in your terminal, replacing `example.testnet` with your account you have full access keys stored locally.
 
     ```bash
-    export NEAR_ACCT=example .testnet
+    export NEAR_ACCT=example.testnet
     ```
 
-    **Windows users: ** Please look into using `set` instead of `export`, surrounding the environment variable in `%` instead of beginning with `$`.
+    **Windows users:** Please look into using `set` instead of `export`, surrounding the environment variable in `%` instead of beginning with `$`.
 
 4) Create a subaccount to deploy a smart contract to
 
@@ -98,7 +98,7 @@ yarn exsetcharts
 For example `getData()` results, run:
 
 ```bash
-yarn exxgetcharts
+yarn exgetcharts
 ```
 
 ### Advisory
