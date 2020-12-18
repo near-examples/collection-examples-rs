@@ -1,8 +1,8 @@
 require.config({
   paths: {
-    tree_map: "../results/example-results/add_tree_map_results",
-    lookup_map: "../results/example-results/add_lookup_map_results",
-    unordered_map: "../results/example-results/add_unordered_map_results",
+    tree_map: "../results/example-results/set-data/add_tree_map_results",
+    lookup_map: "../results/example-results/set-data/add_lookup_map_results",
+    unordered_map: "../results/example-results/set-data/add_unordered_map_results",
   },
 });
 
@@ -10,6 +10,7 @@ function renderChart(chartName, chartData) {
   const ctx = document.getElementById(chartName).getContext("2d");
   const keys = chartData.map((n) => Object.keys(n)[0]);
   const values = chartData.map((n) => Object.values(n)[0]);
+  const numberOfRecords = chartData.length.toString() + " records"
 
   const myChart = new Chart(ctx, {
     type: "line",
@@ -26,12 +27,19 @@ function renderChart(chartName, chartData) {
       ],
     },
     options: {
-      elements: {
-        line: {
-          borderJoinStyle: "round",
-        },
+      legend: {
+        display: true,
       },
       scales: {
+        xAxes: [
+          {
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: numberOfRecords,
+            }
+          },
+        ],
         yAxes: [
           {
             ticks: {

@@ -6,10 +6,12 @@ require.config({
   },
 });
 
+
 function renderChart(chartName, chartData) {
   const ctx = document.getElementById(chartName).getContext("2d");
   const keys = chartData.map((n) => Object.keys(n)[0]);
   const values = chartData.map((n) => Object.values(n)[0]);
+  const numberOfRecords = chartData.length.toString() + " records"
 
   const myChart = new Chart(ctx, {
     type: "line",
@@ -20,18 +22,25 @@ function renderChart(chartName, chartData) {
           label: chartName,
           data: values,
           backgroundColor: ["rgba(255, 178, 91, .5)"],
-          borderColor: ["rgba(0, 0, 0, .5)"],
+          borderColor: ["rgba(0, 0, 0, .25)"],
           borderWidth: 1,
         },
       ],
     },
     options: {
-      elements: {
-        line: {
-          borderJoinStyle: "round",
-        },
+      legend: {
+        display: true,
       },
       scales: {
+        xAxes: [
+          {
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: numberOfRecords,
+            }
+          },
+        ],
         yAxes: [
           {
             ticks: {

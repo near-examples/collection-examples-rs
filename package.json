@@ -2,11 +2,14 @@
   "scripts": {
     "create-account": "near create-account my.words.testnet --masterAccount words.testnet",
     "delete-account": "near delete my.words.testnet words.testnet",
-    "example-charts": "open results/example-results/index.html",
-    "my-charts": "open results/user-results/index.html",
-    "deploy": "near deploy --accountId my.words.testnet --wasmFile=\"./collection_comparison.wasm\" --initFunction new --initArgs '{}'",
+    "exSetcharts": "open results/example-results/set-data/index.html",
+    "exgetcharts": "open results/example-results/get-data/index.html",
+    "setcharts": "open results/user-results/set-data/index.html",
+    "getcharts": "open results/user-results/get-data/index.html",
+    "deploy": "near deploy --accountId my.words.testnet --wasmFile=\"./smart-contract/collection_comparison.wasm\" --initFunction new --initArgs '{}'",
     "reset": "rm -rf contract.wasm && rm -rf ./neardev",
-    "rebuild": "yarn delete-account && yarn create-account && yarn deploy"
+    "rebuild": "yarn delete-account && yarn create-account && yarn deploy",
+    "clear": "rm -rf results/user-results/set-data/*.js && rm -rf results/user-results/get-data/*.js "
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.9.0",

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-family:'Courier New', Courier, monospace">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,16 +8,20 @@
       data-main="../../../services/getData-user-charts"
       src="https://requirejs.org/docs/release/2.3.6/minified/require.js"
     ></script>
-    <title>Contract Call Gas Costs - Rust</title>
+    <title>Gas Burnt Getting Data - Rust</title>
   </head>
-  <body style="display: flex">
-    <div style="width: 33%">
+  <header style="text-align:center;">
+    <h2 style= "margin-bottom: 0">Gas Burnt Retrieving Data</h2>
+    <h3 style="margin-top: 0">...::[ RUST Contract ]::...</h3>
+  </header>
+  <body>
+    <div style="width: 33%; float: left">
       <canvas id="lookup_map" width="400" height="400"></canvas>
     </div>
-    <div style="width: 33%">
+    <div style="width: 33%; float: left">
       <canvas id="unordered_map" width="400" height="400"></canvas>
     </div>
-    <div style="width: 33%">
+    <div style="width: 33%; float: left">
       <canvas id="tree_map" width="400" height="400"></canvas>
     </div>
   </body>
