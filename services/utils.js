@@ -1,10 +1,11 @@
 const nearAPI = require("near-api-js");
 const userHome = require('user-home');
 const data = require("./data");
+require('dotenv').config();
 
 // replace contractName with one that you have a full access key for
 // if you do not already have keys stored locally use `near login` in your terminal to do so
-const contractName = 'my.words.testnet';
+const contractName = process.env.NEAR_ACCOUNT;
 const keyStore = new nearAPI.keyStores.UnencryptedFileSystemKeyStore(`${userHome}/.near-credentials`);
 
 // constructs a local Contract object that allows you to interact with a NEAR smart contract

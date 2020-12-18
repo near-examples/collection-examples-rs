@@ -27,9 +27,15 @@ This repository serves to demonstrate differences in gas consumption when storin
 
     You will be redirected to [NEAR `testnet` wallet](https://wallet.testnet.near.org/) to authorize `near cli`. Once permission is granted, you will have a full access key stored as a `.json` file in `~/.near-credentials`. _For non macOS / Linux users, this "hidden" folder is located in the root of your HOME directory.
 
-3) Update `contractName` in `.utils.js`
+3) Set an environment variable for `NEAR_ACCOUNT`
 
-    Navigate to `services/utils.js` and replace the value for `contractName` to that of the `accountId` you have stored locally.
+    Set an environment variable to use in these examples. To do so run the following in your terminal, replacing `example.testnet` with your account you have full access keys stored locally.
+
+    ```bash
+    export NEAR_ACCT=example .testnet
+    ```
+
+    **Windows users: ** Please look into using `set` instead of `export`, surrounding the environment variable in `%` instead of beginning with `$`.
 
 4) Create a subaccount to deploy a smart contract to
 
@@ -95,7 +101,7 @@ For example `getData()` results, run:
 yarn exxgetcharts
 ```
 
-### ⚠️ Advisory
+### Advisory
 
 Sometimes, with large data amounts you may run into `BadGateway` or `Transaction has expired`. If this happens try lowering the number of values you are entering, or rebuilding the contract by running:
 

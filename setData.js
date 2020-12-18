@@ -3,7 +3,7 @@ const { exec } = require("child_process");
 const { getContract, getDataSet } = require("./services/utils");
 const uniqueData = require("./services/uniqueData");
 
-// maximum amount of gas you can attache to a single contract call
+// maximum amount of gas you can attach to a single contract call
 // all unused gas will be refunded to your account
 const MAX_GAS = "300000000000000";
 
