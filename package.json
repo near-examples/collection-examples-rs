@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "create-account": "near create-account my.words.testnet --masterAccount words.testnet",
+    "create-account": "near create-account my.words.testnet --masterAccount words.testnet --initialBalance 200",
     "delete-account": "near delete my.words.testnet words.testnet",
     "exSetcharts": "open results/example-results/set-data/index.html",
     "exgetcharts": "open results/example-results/get-data/index.html",
