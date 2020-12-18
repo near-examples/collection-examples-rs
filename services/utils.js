@@ -2,9 +2,12 @@ const nearAPI = require("near-api-js");
 const userHome = require('user-home');
 const data = require("./data");
 
+// replace contractName with one that you have a full access key for
+// if you do not already have keys stored locally use `near login` in your terminal to do so
 const contractName = 'my.words.testnet';
 const keyStore = new nearAPI.keyStores.UnencryptedFileSystemKeyStore(`${userHome}/.near-credentials`);
 
+// constructs a local Contract object that allows you to interact with a NEAR smart contract
 async function getContract() {
     const config = {
         keyStore,
@@ -34,6 +37,7 @@ async function getContract() {
     return new nearAPI.Contract(accountObj, contractName, methodArgs);
 }
 
+// gets X amount of sample data based on the value passed
 const getDataSet = (maxVal) => {
   const delta = Math.floor(data.length / maxVal);
   let results = [];

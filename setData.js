@@ -58,7 +58,7 @@ async function setData(data) {
   await recordGasResults(contract, "add_lookup_map", data);
   await recordGasResults(contract, "add_unordered_map", data);
   await recordGasResults(contract, "add_tree_map", data);
-  exec("yarn mySetCharts");
+  exec("yarn setcharts");
 }
 
 // enter number of records to add to each map (1 - 2000); 30 is default
