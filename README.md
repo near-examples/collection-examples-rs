@@ -19,21 +19,21 @@ This repository serves to demonstrate differences in gas consumption when storin
 
 2) Store your access keys locally
 
-    To store your access keys locally, run:
+    If you do not already have keys stored locally, run:
 
     ```bash
     near login
     ```
 
-    You will be redirected to [NEAR `testnet` wallet](https://wallet.testnet.near.org/) to authorize `near cli`. Once permission is granted, you will have a full access key stored as a `.json` file in `.near-credentials`. This folder is located in the root of your HOME directory. (~/.near-credentials for Mac / Linux)
+    You will be redirected to [NEAR `testnet` wallet](https://wallet.testnet.near.org/) to authorize `near cli`. Once permission is granted, you will have a full access key stored as a `.json` file in `~/.near-credentials`. _For non macOS / Linux users, this "hidden" folder is located in the root of your HOME directory.
 
 3) Update `contractName` in `.utils.js`
 
-    Navigate to `services/utils.js` and replace the value for `contractName` to that of the accountId you just stored a full access key for.
+    Navigate to `services/utils.js` and replace the value for `contractName` to that of the `accountId` you have stored locally.
 
 4) Create a subaccount to deploy a smart contract to
 
-    For this example we will create a subaccount that we can deploy this example smart contract to. This repo contains a script that allows us to delete and re-create this sub account to reset data already stored in the contract.
+    For this example we will create a subaccount that we can deploy a smart contract to. This repo contains a script that allows us to delete and recreate this sub account to reset _all_ of the data already stored in the contract.
 
     To create this subaccount run:
 
@@ -43,7 +43,7 @@ This repository serves to demonstrate differences in gas consumption when storin
 
 5) Deploy your smart contract
 
-    A `.wasm` file is already compiled for you and ready to deploy. To do so simply run:
+    A `.wasm` file is already compiled for you and ready to deploy. To do so, simply run:
 
     ```bash
     yarn deploy
@@ -51,23 +51,23 @@ This repository serves to demonstrate differences in gas consumption when storin
 
     You can view the source code of this deployed contract by navigating to `smart-contract/lib.rs`
 
-### Set Data
+### Storing Data
 
 Open `setData.js` in your local IDE and select the number of records you would like to add to the three collection examples. You can do so by changing the number passed to `getDataSet()` at the bottom of this file.
 
-To run type the following in your terminal:
+To run the script, type the following in your terminal:
 
 ```bash
 node setData.js
 ```
 
-The script will start to run returning `gas_burnt`, `responseTime`, and the current key of the data stored. Once complete, a chart will automatically launch showing you your results. At anytime you can view the chart progress by manually running:
+The Node script will start to run console logging `gas_burnt`, `responseTime`, and the current key of the data stored. Once complete, a chart will automatically launch showing you your results. At anytime you can view the chart progress by manually running:
 
 ```bash
 yarn setcharts
 ```
 
-### Get Data
+### Retrieving Data
 
 Open `getData.js` and make sure the number passed to `getData()` is the same number of values you just added. Once verified, run:
 
@@ -83,21 +83,19 @@ yarn getcharts
 
 ### View Example Results
 
-This process can take some time, depending on the amount of records you decide to add. If you would like to see what some example results look like right away, run:
+This process can take some time, depending on the amount of records you decide to add. If you would like to see what some example results look like right away, run the following to see example `setData()` results:
 
 ```bash
 yarn exsetcharts
 ```
 
-for example `setData()` results, or:
+For example `getData()` results, run:
 
 ```bash
 yarn exxgetcharts
 ```
 
-for example `getData()` results.
-
-### Advisory
+### ⚠️ Advisory
 
 Sometimes, with large data amounts you may run into `BadGateway` or `Transaction has expired`. If this happens try lowering the number of values you are entering, or rebuilding the contract by running:
 
