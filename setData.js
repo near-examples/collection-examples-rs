@@ -26,14 +26,12 @@ async function calculateGas(contract, contractMethod, dataObj) {
     dataObj.value
   );
   gasBurnt.push(result.transaction_outcome.outcome.gas_burnt);
-  tokensBurnt.push(
-    formatNEAR(result.transaction_outcome.outcome.tokens_burnt)
-    );
+  tokensBurnt.push(formatNEAR(result.transaction_outcome.outcome.tokens_burnt));
   for (let i = 0; i < result.receipts_outcome.length; i++) {
     gasBurnt.push(result.receipts_outcome[i].outcome.gas_burnt);
     tokensBurnt.push(
       formatNEAR(result.receipts_outcome[i].outcome.tokens_burnt)
-      );
+    );
   }
   return {
     gas_burnt: gasBurnt.reduce((acc, cur) => acc + cur, 0),
@@ -71,7 +69,7 @@ async function setData(data) {
   await recordGasResults(contract, "add_lookup_map", data);
   await recordGasResults(contract, "add_unordered_map", data);
   await recordGasResults(contract, "add_tree_map", data);
-  exec("yarn setcharts");
+  exec("yarn setCharts");
 }
 
 // enter number of records to add to each map (1 - 2000); 30 is default
