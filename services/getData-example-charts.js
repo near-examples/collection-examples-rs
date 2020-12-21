@@ -9,27 +9,37 @@ require.config({
 
 function renderChart(chartName, chartData) {
   const ctx = document.getElementById(chartName).getContext("2d");
-  const keys = chartData.map((n) => Object.keys(n)[0]);
-  const values = chartData.map((n) => Object.values(n)[0]);
-  const numberOfRecords = chartData.length.toString() + " records"
+  const keys = chartData.map((item) => item.key);
+  const values = chartData.map((item) => item.gas_burnt);
+  const tokens_burnt = chartData.reduce((acc, curr) => acc + curr.tokens_burnt,0);
+  const totals = "Total Tx Fee: " + tokens_burnt.toFixed(4) + " Ⓝ";
 
   const myChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: keys,
+      labels: keys, 
       datasets: [
         {
           label: chartName,
           data: values,
-          backgroundColor: ["rgba(255, 178, 91, .5)"],
-          borderColor: ["rgba(0, 0, 0, .5)"],
+          backgroundColor: ["rgba(255, 178, 91, .7)"],
+          borderColor: ["rgba(0, 0, 0, .25)"],
           borderWidth: 1,
         },
       ],
     },
     options: {
+      title: {
+        display: true,
+        text: chartData.length.toString() + " records" ,
+        fontFamily: 'Source Code Pro',
+        fontSize: 16
+      },
       legend: {
         display: true,
+        labels: {
+          fontFamily: 'Source Code Pro',
+        }
       },
       scales: {
         xAxes: [
@@ -37,15 +47,30 @@ function renderChart(chartName, chartData) {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: numberOfRecords,
+              fontColor: '#333',
+              fontSize: 16,
+              fontFamily: 'Source Code Pro',
+              labelString: totals,
+            },
+            ticks: {
+              fontSize: 8,
+              fontFamily: 'Source Code Pro',
             }
           },
         ],
         yAxes: [
           {
+            display: true,
+            scaleLabel: {
+              display: true,
+              fontFamily: 'Source Code Pro',
+              labelString: "TGas Burnt (10^12)",
+            },
             ticks: {
-              suggestedMin: 5500000000000,
-              suggestedMax: 5600000000000,
+              fontFamily: 'Source Code Pro',
+              fontSize: 12,
+              suggestedMin: 5.75,
+              suggestedMax: 6,
             },
           },
         ],

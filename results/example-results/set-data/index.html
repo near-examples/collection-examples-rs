@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" style="font-family:'Courier New', Courier, monospace">
+<html lang="en" style="font-family: 'Source Code Pro', monospace">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
     <script
       data-main="../../../services/setData-example-charts"
@@ -10,9 +14,9 @@
     ></script>
     <title>Gas Burnt Adding Data - Rust</title>
   </head>
-  <header style="text-align:center;">
-    <h2 style= "margin-bottom: 0">Gas Burnt Adding Data</h2>
-    <h3 style="margin-top: 0">...::[ RUST ]::...</h3>
+  <header style="text-align: center">
+    <h2 style="margin-bottom: 0">Gas Burnt Adding Data</h2>
+    <h4 style="margin-top: 0">...::[ RUST Contract ]::...</h4>
   </header>
   <body>
     <div style="width: 33%; float: left">
@@ -23,6 +27,12 @@
     </div>
     <div style="width: 33%; float: left">
       <canvas id="tree_map" width="400" height="400"></canvas>
+      <div id="avg"></div>
     </div>
   </body>
+  <footer style="text-align: center">
+    <h2 style="color: red;">
+      *** EXAMPLE DATA ***
+    <h2>
+  </footer>
 </html>

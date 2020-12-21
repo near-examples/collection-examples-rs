@@ -5,7 +5,7 @@ require('dotenv').config();
 
 // replace contractName with one that you have a full access key for
 // if you do not already have keys stored locally use `near login` in your terminal to do so
-const contractName = process.env.NEAR_ACCOUNT;
+const contractName = 'collections.' + process.env.NEAR_ACCOUNT;
 const keyStore = new nearAPI.keyStores.UnencryptedFileSystemKeyStore(`${userHome}/.near-credentials`);
 
 // constructs a local Contract object that allows you to interact with a NEAR smart contract
@@ -49,4 +49,10 @@ const getDataSet = (maxVal) => {
   return results;
 }
 
-module.exports = { contractName, getContract, getDataSet };
+// converts yoctoNEAR (passed as a string) into standard Ⓝ as a float
+const formatNEAR = (yoctoNEAR) => {
+   return Number(
+    nearAPI.utils.format.formatNearAmount(yoctoNEAR)
+    ) 
+}
+module.exports = { contractName, getContract, getDataSet, formatNEAR };

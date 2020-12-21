@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { exec } = require("child_process");
+const nearAPI = require("near-api-js");
 const { getContract, getDataSet } = require("./services/utils");
 
 // maximum amount of gas you can attach to a single contract call
@@ -17,13 +18,35 @@ async function getKeyValuePair(contract, contractMethodString, key) {
 }
 
 async function calculateGas(contract, contractMethod, key) {
-  let resultArr = [];
-  const result = await getKeyValuePair(contract, contractMethod, key);
-  resultArr.push(result.transaction_outcome.outcome.gas_burnt);
+  let gasBurnt = [];
+  let tokensBurnt = [];
+  const result = await getKeyValuePair(
+    contract,
+    contractMethod,
+    key
+  );
+  gasBurnt.push(result.transaction_outcome.outcome.gas_burnt);
+  tokensBurnt.push(
+    Number(
+      nearAPI.utils.format.formatNearAmount(
+        result.transaction_outcome.outcome.tokens_burnt
+      )
+    )
+  );
   for (let i = 0; i < result.receipts_outcome.length; i++) {
-    resultArr.push(result.receipts_outcome[i].outcome.gas_burnt);
+    gasBurnt.push(result.receipts_outcome[i].outcome.gas_burnt);
+    tokensBurnt.push(
+      Number(
+        nearAPI.utils.format.formatNearAmount(
+          result.receipts_outcome[i].outcome.tokens_burnt
+        )
+      )
+    );
   }
-  return resultArr.reduce((acc, curr) => acc + curr, 0);
+  return {
+    gas_burnt: gasBurnt.reduce((acc, cur) => acc + cur, 0),
+    tokens_burnt: tokensBurnt.reduce((acc, curr) => acc + curr, 0),
+  };
 }
 
 async function recordGasResults(contract, contractMethod, dataArr) {
@@ -32,14 +55,17 @@ async function recordGasResults(contract, contractMethod, dataArr) {
   );
   let resultArr = [];
   for (let i = 0; i < dataArr.length; i++) {
-    const timeBeforeCall = Date.now();
-    const gasBurnt = await calculateGas(contract, contractMethod, dataArr[i]);
-    const timeAfterCall = Date.now();
-    const responseTime = (timeAfterCall - timeBeforeCall) / 1000 + " sec.";
-    let result = {};
-    result[dataArr[i]] = gasBurnt;
-    resultArr.push(result);
-    console.log(gasBurnt, responseTime, dataArr[i]);
+    console.time("call_duration");
+    console.log("call placed at:", new Date());
+    const results = await calculateGas(contract, contractMethod, dataArr[i]);
+    console.log(dataArr[i])
+    console.timeEnd("call_duration");
+    console.log(results);
+    resultArr.push({
+      key: dataArr[i],
+      gas_burnt: Number((results.gas_burnt/1e12).toFixed(4)),
+      tokens_burnt: results.tokens_burnt
+    });
     fs.writeFileSync(
       `results/user-results/get-data/${contractMethod}_results.js`,
       `const ${contractMethod}_data = ${JSON.stringify(resultArr)}`
@@ -51,11 +77,11 @@ async function getData(amount) {
   const contract = await getContract();
   const data = getDataSet(amount);
   await recordGasResults(contract, "get_lookup_map", Object.keys(data));
-  await recordGasResults(contract, "get_tree_map", Object.keys(data));
   await recordGasResults(contract, "get_unordered_map", Object.keys(data));
+  await recordGasResults(contract, "get_tree_map", Object.keys(data));
   exec("yarn getcharts");
 }
 
 // enter number of records to get from each map 
 // (make sure its the same amount as you added in setData.js)
-getData(60);
+getData(300);
