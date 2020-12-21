@@ -19,7 +19,6 @@
     "dotenv": "^8.2.0",
     "eslint": "^7.14.0",
     "near-cli": "^1.4.0",
-    "near-sdk-as": "^2.1.0",
     "user-home": "^2.0.0"
   },
   "dependencies": {

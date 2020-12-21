@@ -1,4 +1,3 @@
-/neardev
 /node_modules
-result.json
 package-lock.json
+yarn.lock
