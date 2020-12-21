@@ -1,6 +1,6 @@
 # NEAR Rust Collection Examples using `near-sdk-rs`
 
-This repository serves to demonstrate differences in gas consumption when storing or retrieving data from the NEAR blockchain using Rust collection methods found in [`near-sdk-rs`](https://github.com/near/near-sdk-rs).
+This repository serves to demonstrate differences in gas consumption when storing or retrieving data from the NEAR blockchain using [Rust](https://www.rust-lang.org/) collection methods found in [`near-sdk-rs`](https://github.com/near/near-sdk-rs).
 
 After running `setData.js` or `getData.js`, results will be populated in a chart and automatically displayed upon completion.
 
