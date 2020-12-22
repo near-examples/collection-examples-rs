@@ -36,7 +36,7 @@ After running `setData.js` or `getData.js`, results will be populated in a chart
    Set your account name as environment variable to use in these examples. Create one in your `bash` or `zsh` profile (recommended) or run the following in your terminal. _(replacing `example.testnet` with your account that you have full access keys stored locally)_
 
    ```bash
-   export NEAR_ACCT=example.testnet
+   export NEAR_ACCOUNT=example.testnet
    ```
 
    **Windows users:** Please look into using `set` instead of `export`, surrounding the environment variable in `%` instead of beginning with `$`.
