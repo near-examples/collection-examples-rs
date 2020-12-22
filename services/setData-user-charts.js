@@ -10,8 +10,11 @@ function renderChart(chartName, chartData) {
   const ctx = document.getElementById(chartName).getContext("2d");
   const keys = chartData.map((item) => item.key);
   const values = chartData.map((item) => item.gas_burnt);
+  const gasBurnt = chartData.reduce((acc, curr) => acc + curr.gas_burnt,0);
+  const avgGasBurnt = (gasBurnt / chartData.length).toFixed(2)
   const tokens_burnt = chartData.reduce((acc, curr) => acc + curr.tokens_burnt,0);
-  const totals = "Total Tx Fee: " + tokens_burnt.toFixed(4) + " Ⓝ";
+  const totalTxCost = "Total Tx Fee: " + tokens_burnt.toFixed(4) + " Ⓝ";
+  const avgGasAndTotalCalls = "Calls made: " + chartData.length.toString() + " | Avg. TGas Burnt: " + avgGasBurnt;
 
   const myChart = new Chart(ctx, {
     type: "line",
@@ -30,9 +33,10 @@ function renderChart(chartName, chartData) {
     options: {
       title: {
         display: true,
-        text: chartData.length.toString() + " records" ,
+        text: totalTxCost,
         fontFamily: 'Source Code Pro',
-        fontSize: 16
+        fontSize: 16,
+        fontColor: '#333'
       },
       legend: {
         display: true,
@@ -49,7 +53,7 @@ function renderChart(chartName, chartData) {
               fontColor: '#333',
               fontSize: 16,
               fontFamily: 'Source Code Pro',
-              labelString: totals,
+              labelString: avgGasAndTotalCalls,
             },
             ticks: {
               fontSize: 8,
@@ -69,7 +73,7 @@ function renderChart(chartName, chartData) {
               fontFamily: 'Source Code Pro',
               fontSize: 12,
               suggestedMin: 5,
-              suggestedMax: 30,
+              suggestedMax: 10,
             },
           },
         ],
@@ -78,6 +82,7 @@ function renderChart(chartName, chartData) {
   });
   return myChart;
 }
+
 
 requirejs(["tree_map"], function () {
   return renderChart("tree_map", add_tree_map_data);

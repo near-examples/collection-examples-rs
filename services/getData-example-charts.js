@@ -2,8 +2,7 @@ require.config({
   paths: {
     tree_map: "../results/example-results/get-data/get_tree_map_results",
     lookup_map: "../results/example-results/get-data/get_lookup_map_results",
-    unordered_map:
-      "../results/example-results/get-data/get_unordered_map_results",
+    unordered_map: "../results/example-results/get-data/get_unordered_map_results",
   },
 });
 

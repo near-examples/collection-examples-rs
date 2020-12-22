@@ -73,6 +73,6 @@ async function setData(data) {
 }
 
 // enter number of records to add to each map (1 - 2000); 30 is default
-const data = getDataSet(30);
+const data = getDataSet(100);
 
 setData(data);
