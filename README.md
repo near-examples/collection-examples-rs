@@ -39,6 +39,8 @@ After running `setData.js` or `getData.js`, results will be populated in a chart
    export NEAR_ACCOUNT=example.testnet
    ```
 
+   If you choose to run this command in your terminal rather than adding it to your `bash` or `zsh` profile
+
    **Windows users:** Please look into using `set` instead of `export`, surrounding the environment variable in `%` instead of beginning with `$`.
 
 4. Create a subaccount to deploy a smart contract to
