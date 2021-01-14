@@ -10,12 +10,10 @@ require.config({
 function renderChart(chartName, chartData) {
   const ctx = document.getElementById(chartName).getContext("2d");
   const keys = chartData.map((item) => item.key);
-  const values = chartData.map((item) => item.gas_burnt);
-  const gasBurnt = chartData.reduce((acc, curr) => acc + curr.gas_burnt,0);
+  const contractCallCost = 5.769;
+  const values = chartData.map((item) => item.gas_burnt - contractCallCost);
+  const gasBurnt = chartData.reduce((acc, curr) => acc + (curr.gas_burnt - contractCallCost), 0);
   const avgGasBurnt = (gasBurnt / chartData.length).toFixed(2)
-  const tokens_burnt = chartData.reduce((acc, curr) => acc + curr.tokens_burnt,0);
-  const totalTxCost = "Total Tx Fee: " + tokens_burnt.toFixed(4) + " Ⓝ";
-  const avgGasAndTotalCalls = "Calls made: " + chartData.length.toString() + " | Avg. TGas Burnt: " + avgGasBurnt;
 
   const myChart = new Chart(ctx, {
     type: "line",
@@ -23,7 +21,7 @@ function renderChart(chartName, chartData) {
       labels: keys, 
       datasets: [
         {
-          label: totalTxCost,
+          label: "Calls made: " + chartData.length.toString(),
           data: values,
           backgroundColor: ["rgba(255, 178, 91, .7)"],
           borderColor: ["rgba(0, 0, 0, .25)"],
@@ -54,7 +52,7 @@ function renderChart(chartName, chartData) {
               fontColor: '#333',
               fontSize: 16,
               fontFamily: 'Source Code Pro',
-              labelString: avgGasAndTotalCalls,
+              labelString: avgGasBurnt + " average TGas burnt",
             },
             ticks: {
               fontSize: 8,
@@ -73,8 +71,8 @@ function renderChart(chartName, chartData) {
             ticks: {
               fontFamily: 'Source Code Pro',
               fontSize: 12,
-              suggestedMin: 5,
-              suggestedMax: 10,
+              suggestedMin: 0,
+              suggestedMax: 3,
             },
           },
         ],
