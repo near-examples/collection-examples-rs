@@ -12,7 +12,7 @@ const keyStore = new nearAPI.keyStores.UnencryptedFileSystemKeyStore(`${userHome
 async function getContract() {
     const config = {
         keyStore,
-        networkId: 'default',
+        networkId: 'testnet',
         nodeUrl: 'https://rpc.testnet.near.org',
         walletUrl: 'https://wallet.testnet.near.org',
         helperUrl: 'https://helper.testnet.near.org',
