@@ -10,7 +10,7 @@ After running `setData.js` or `getData.js`, results will be populated in a chart
 
 - Current version of [Node.js](https://nodejs.org/). >=v14.0.0
 - [NEAR `testnet` account](https://wallet.testnet.near.org/)
-- [`near-cli`](https://docs.near.org/docs/tools/near-cli#setup) - _(command line interface to interact with the NEAR blockchain)_
+- [`near-cli`](https://docs.near.org/tools/near-cli#setup) - _(command line interface to interact with the NEAR blockchain)_
 - [yarn](https://classic.yarnpkg.com/en/docs/install) - _(dependency management tool)_
 
 ## Setup
@@ -45,7 +45,7 @@ After running `setData.js` or `getData.js`, results will be populated in a chart
 
 4. Create a subaccount to deploy a smart contract to
 
-   For this example you will deploy a smart contract to a [subaccount](https://docs.near.org/docs/concepts/account#subaccounts). We will do this so we can easily delete and recreate an account to reset _all_ of the data stored in the contract.
+   For this example you will deploy a smart contract to a [subaccount](https://docs.near.org/concepts/basics/account#subaccounts). We will do this so we can easily delete and recreate an account to reset _all_ of the data stored in the contract.
 
    To create this subaccount run:
 
